@@ -10,9 +10,13 @@ import FinishScene from "./scenes/FinishScene"
 
 const config = {
     type: Phaser.AUTO,
-    backgroundColor: "#f6f6f6",
-    width: 800,
-    height: 600,
+    transparent: true,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+    width: 1280,
+    height: 720,
     scene: [
         BootScene,
         LoadScene,
