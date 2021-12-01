@@ -1,19 +1,47 @@
+import Helper from "../classes/Helper"
+
 export default class RoomsScene extends Phaser.Scene {
+  public helper: any
+
   constructor() {
     super("RoomsScene")
+    this.helper = new Helper(this)
   }
 
   create() {
-    // TODO: отобразить фон
-    // TODO: отобразить меню:
-      // 1) Создать свою комнату
-        // 1.1) при клике - перейти на сцену "CreateRoomScene"
+    this.helper.drawBackground()
+    this.helper.createMenu({
+      list: [
+        {
+          menu: "create-room",
+          label: "Создать свою комнату",
+        },
+        {
+          menu: "find-room",
+          label: "Войти в комнату",
+        },
+        {
+          menu: "back",
+          label: "Назад",
+        },
+      ],
+      onClick: this.menuClick.bind(this)
+    })
+  }
 
-      // 2) Войти в комнату
-        // 2.1) при клике - перейти на сцену "FindRoomScene"
-        
-      // 3) кнопка "Назад"
-      
-    // TODO: обработать события нажатия на кнопок
+  menuClick(object: any) {
+    switch (object.menu) {
+      case 'create-room':
+        this.scene.start("CreateRoomScene")
+        break;
+
+      case 'find-room':
+        this.scene.start("FindRoomScene")
+        break;
+
+      case 'back':
+        this.scene.start("MenuScene")
+        break;
+    }
   }
 }

@@ -15,6 +15,7 @@ export default class StartScene extends Phaser.Scene {
   }
 
   onTapDown() {
+    this.sound.play("click")
     this.scene.start('MenuScene')
   }
 }

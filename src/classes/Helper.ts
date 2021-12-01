@@ -60,7 +60,10 @@ export default class Background {
       this.createMenuText(button.label, y)
     })
     
-    this.scene.input.on("gameobjectdown", (pointer, object) => params.onClick(object))
+    this.scene.input.on("gameobjectdown", (pointer, object) => {
+      this.scene.sound.play("click")
+      params.onClick(object)
+    })
   }
 
   createMenuBackground(button, x, y) {
