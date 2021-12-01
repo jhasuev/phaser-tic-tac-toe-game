@@ -1,5 +1,3 @@
-import 'phaser'
-
 export default class CreateRoomScene extends Phaser.Scene {
   constructor() {
     super("CreateRoomScene")

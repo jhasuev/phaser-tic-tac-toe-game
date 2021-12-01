@@ -1,5 +1,3 @@
-import 'phaser'
-
 export default class FinishScene extends Phaser.Scene {
   constructor() {
     super("FinishScene")
