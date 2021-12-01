@@ -1,8 +1,8 @@
 import Preloader from "../classes/Preloader"
 
-export default class LoadScene extends Phaser.Scene {
+export default class PreloadScene extends Phaser.Scene {
   constructor() {
-    super("LoadScene")
+    super("PreloadScene")
   }
 
   preload() {

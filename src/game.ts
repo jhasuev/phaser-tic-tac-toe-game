@@ -1,6 +1,6 @@
 import 'phaser'
 import BootScene from "./scenes/BootScene"
-import LoadScene from "./scenes/LoadScene"
+import PreloadScene from "./scenes/PreloadScene"
 import StartScene from "./scenes/StartScene"
 import MenuScene from "./scenes/MenuScene"
 import RoomsScene from "./scenes/RoomsScene"
@@ -19,7 +19,7 @@ const config = {
     height: 720,
     scene: [
         BootScene,
-        LoadScene,
+        PreloadScene,
         StartScene,
         MenuScene,
         RoomsScene,
