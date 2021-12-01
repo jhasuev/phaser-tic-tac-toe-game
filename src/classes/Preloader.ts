@@ -1,5 +1,14 @@
 export default class Preloader {
-  constructor(scene) {
+  public scene: any
+  public width: number
+  public height: number
+  public offsetY: number
+  public x: number
+  public y: number
+  public back: any
+  public front: any
+
+  constructor(scene: object) {
     this.scene = scene
     this.init()
   }

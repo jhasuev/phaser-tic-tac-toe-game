@@ -27,7 +27,7 @@ export default class PreloadScene extends Phaser.Scene {
 
     this.time.addEvent({
       // для красоты
-      delay: 2000,
+      // delay: 2000,
       callback: () => {
         this.scene.start("StartScene")
       },
