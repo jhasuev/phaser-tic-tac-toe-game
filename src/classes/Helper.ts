@@ -1,8 +1,20 @@
 const CONFIGS = {
   styles: {
-    header: {
+    pulseHeader: {
       fontSize: '48px',
       fontFamily: 'Palatino Linotype',
+    },
+    header: {
+      offsetY: 80,
+      fontSize: '40px',
+      fontFamily: 'Palatino Linotype',
+    },
+    text: {
+      offsetY: 40 + 80 + 30,
+      fontSize: '26px',
+      fontFamily: 'Palatino Linotype',
+      textAlign: "center",
+      align: "center",
     },
     menu: {
       offset: 20,
@@ -38,7 +50,7 @@ export default class Background {
 
   addPulsingText(text, styles = {}) {
     const textObject = this.scene.add.text(+this.scene.game.config.width / 2, +this.scene.game.config.height / 2, text, {
-      ...CONFIGS.styles.header,
+      ...CONFIGS.styles.pulseHeader,
       ...styles,
     }).setOrigin(.5)
 
@@ -49,6 +61,24 @@ export default class Background {
         repeat: -1,
         yoyo: true,
     })
+  }
+
+  createHeader(text: string) {
+    this.scene.add.text(
+      +this.scene.game.config.width / 2,
+      CONFIGS.styles.header.offsetY,
+      text,
+      CONFIGS.styles.header
+    ).setOrigin(.5, 0)
+  }
+
+  createDescription(text: string) {
+    this.scene.add.text(
+      +this.scene.game.config.width / 2,
+      CONFIGS.styles.text.offsetY,
+      text,
+      CONFIGS.styles.text
+    ).setOrigin(.5, 0)
   }
 
   createMenu(params) {
