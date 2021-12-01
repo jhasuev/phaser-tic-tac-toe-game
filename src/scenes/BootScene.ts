@@ -4,12 +4,10 @@ export default class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    // TODO: загрузка фона
-    console.log("BootScene")
+    this.load.image("bg", "./assets/img/bg.jpg")
   }
 
   create() {
-    // TODO: переключения на сцену "LoadScene"
     this.scene.start("LoadScene")
   }
 }
