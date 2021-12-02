@@ -35,9 +35,15 @@ const CONFIGS = {
 
 export default class Background {
   public scene: any
+  public modals: HTMLDivElement
 
   constructor(scene) {
     this.scene = scene
+    this.init()
+  }
+
+  init() {
+    this.modals = document.querySelector("#modals")
   }
 
   drawBackground(color = 0x000000, opacity = .7) {
@@ -116,5 +122,20 @@ export default class Background {
       text,
       CONFIGS.styles.menu.text
     ).setOrigin(.5)
+  }
+
+  showModal(modalSelector: string) {
+    this.closeModals()
+    this.modals.style.display = "block"
+
+    const currentModal: HTMLDivElement = document.querySelector(modalSelector)
+    currentModal.style.display = "block"
+  }
+
+  closeModals() {
+    this.modals.style.display = "none"
+    Array.from(document.querySelectorAll(".js-modal-item")).forEach((modal: HTMLDivElement) => {
+      modal.style.display = "none"
+    })
   }
 }

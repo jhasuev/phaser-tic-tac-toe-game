@@ -1,18 +1,48 @@
+import Helper from "../classes/Helper"
+
 export default class FindRoomScene extends Phaser.Scene {
+  public helper: any
+  public closeButton: HTMLDivElement
+  public inputField: HTMLInputElement
+  public okButton: HTMLButtonElement
+
   constructor() {
     super("FindRoomScene")
+    this.helper = new Helper(this)
   }
 
   create() {
-    // TODO: отобразить фон
-    // TODO: отобразить:
-      // 1) поле ввода текста (ID комнаты)
+    this.helper.drawBackground()
+    this.helper.showModal("#enter-room-id")
+    this.addEvents()
+    
+    this.inputField = document.querySelector(".js-room-id-field")
+  }
 
-      // 2) кнопка "Войти"
-        // 2.1) при клике - если данные верны - перекинуть на сцену "GameScene"
-        
-      // 3) кнопка "Назад"
-      
-    // TODO: обработать события нажатия на кнопок
+  addEvents() {
+    this.closeButton = document.querySelector(".js-modals-close")
+    this.okButton = document.querySelector(".js-enter-room-btn")
+
+    this.closeButton.onclick = this.onCloseClick.bind(this)
+    this.okButton.onclick = this.onOkClick.bind(this)
+  }
+
+  onCloseClick() {
+    this.inputField.value = ''
+    this.helper.closeModals()
+    this.scene.start("RoomsScene")
+  }
+
+  onOkClick() {
+    this.helper.closeModals()
+    const roomId: number = parseInt(this.inputField.value)
+    if (roomId) {
+      const userId = "asdgfhsvo39vrpmsdf;nidlndir"
+      // TODO: userId получаем с сервера - будет находится ID сокета
+      this.scene.start("GameScene", { type: "pvp", roomId, userId })
+    } else {
+      // TODO: создать сцену "MessageScene"
+      this.scene.start("MessageScene", { type: "wrong-room-id" })
+    }
   }
 }

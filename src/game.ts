@@ -4,6 +4,7 @@ import PreloadScene from "./scenes/PreloadScene"
 import StartScene from "./scenes/StartScene"
 import MenuScene from "./scenes/MenuScene"
 import RoomsScene from "./scenes/RoomsScene"
+import FindRoomScene from "./scenes/FindRoomScene"
 import CreateRoomScene from "./scenes/CreateRoomScene"
 import GameScene from "./scenes/GameScene"
 import FinishScene from "./scenes/FinishScene"
@@ -23,6 +24,7 @@ const config = {
         StartScene,
         MenuScene,
         RoomsScene,
+        FindRoomScene,
         CreateRoomScene,
         GameScene,
         FinishScene,
