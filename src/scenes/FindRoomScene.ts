@@ -28,12 +28,12 @@ export default class FindRoomScene extends Phaser.Scene {
   }
 
   onCloseClick() {
-    this.inputField.value = ''
-    this.helper.closeModals()
+    this.closeModal()
     this.scene.start("RoomsScene")
   }
 
   onOkClick() {
+    this.closeModal()
     this.helper.closeModals()
     const roomId: number = parseInt(this.inputField.value)
     if (roomId) {
@@ -44,5 +44,10 @@ export default class FindRoomScene extends Phaser.Scene {
       // TODO: создать сцену "MessageScene"
       this.scene.start("MessageScene", { type: "wrong-room-id" })
     }
+  }
+
+  closeModal() {
+    this.inputField.value = ''
+    this.helper.closeModals()
   }
 }
