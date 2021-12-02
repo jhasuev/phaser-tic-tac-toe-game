@@ -1,16 +1,19 @@
 import Helper from "../classes/Helper"
+import Menu from "../classes/Menu"
 
 export default class MenuScene extends Phaser.Scene {
   public helper: any
+  public menu: any
 
   constructor() {
     super("MenuScene")
     this.helper = new Helper(this)
+    this.menu = new Menu(this)
   }
 
   create() {
     this.helper.drawBackground()
-    this.helper.createMenu({
+    this.menu.create({
       list: [
         {
           menu: "pve",
@@ -21,19 +24,6 @@ export default class MenuScene extends Phaser.Scene {
           label: "Играть с другом",
         },
       ],
-      onClick: this.menuClick.bind(this)
     })
-  }
-
-  menuClick(object: any) {
-    switch (object.menu) {
-      case 'pve':
-        this.scene.start("GameScene", { type: "pve" })
-        break;
-
-      case 'pvp':
-        this.scene.start("RoomsScene")
-        break;
-    }
   }
 }

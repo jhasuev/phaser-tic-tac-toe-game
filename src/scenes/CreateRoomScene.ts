@@ -1,11 +1,14 @@
 import Helper from "../classes/Helper"
+import Menu from "../classes/Menu"
 
 export default class CreateRoomScene extends Phaser.Scene {
   public helper: any
+  public menu: any
 
   constructor() {
     super("CreateRoomScene")
     this.helper = new Helper(this)
+    this.menu = new Menu(this)
   }
 
   create() {
@@ -16,22 +19,14 @@ export default class CreateRoomScene extends Phaser.Scene {
       'Сообщите вашему сопернику ID вашей комнаты\nи начните играть вместе!\n\n\nОжидаем соперника...'
     )
 
-    this.helper.createMenu({
+    this.menu.create({
       list: [
         {
           menu: "back",
           label: "Назад",
         },
       ],
-      onClick: this.menuClick.bind(this)
+      backScene: "RoomsScene"
     })
-  }
-  
-  menuClick(object: any) {
-    switch (object.menu) {
-      case 'back':
-        this.scene.start("RoomsScene")
-        break;
-    }
   }
 }

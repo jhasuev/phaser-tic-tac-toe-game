@@ -1,11 +1,14 @@
 import Helper from "../classes/Helper"
+import Menu from "../classes/Menu"
 
 export default class MessageScene extends Phaser.Scene {
   public helper: any
+  public menu: any
 
   constructor() {
     super("MessageScene")
     this.helper = new Helper(this)
+    this.menu = new Menu(this)
   }
 
   create(params: object|any) {
@@ -13,6 +16,8 @@ export default class MessageScene extends Phaser.Scene {
 
     const currentMenu: object = {
       "wrong-room-id": {
+        header: "Не правильный ID",
+        text: "Вы ввели не правильный или не существующий ID комнаты\nПопробуйте, пожалуйста, еще раз!",
         list: [
           {
             menu: "find-room",
@@ -23,30 +28,14 @@ export default class MessageScene extends Phaser.Scene {
             label: "На главную",
           },
         ],
-        header: "Не правильный ID",
-        text: "Вы ввели не правильный или не существующий ID комнаты\nПопробуйте, пожалуйста, еще раз!",
       }
     }
 
     this.helper.createHeader(currentMenu[params.type].header)
     this.helper.createDescription(currentMenu[params.type].text)
 
-    this.helper.createMenu({
+    this.menu.create({
       list: currentMenu[params.type].list,
-      onClick: this.menuClick.bind(this)
     })
-  }
-  
-  // TODO: сделать обработчик кликов по меню общим
-  menuClick(object: any) {
-    switch (object.menu) {
-      case 'find-room':
-        this.scene.start("FindRoomScene")
-        break;
-
-      case 'menu':
-        this.scene.start("MenuScene")
-        break;
-    }
   }
 }

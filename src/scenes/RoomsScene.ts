@@ -1,16 +1,19 @@
 import Helper from "../classes/Helper"
+import Menu from "../classes/Menu"
 
 export default class RoomsScene extends Phaser.Scene {
   public helper: any
+  public menu: any
 
   constructor() {
     super("RoomsScene")
     this.helper = new Helper(this)
+    this.menu = new Menu(this)
   }
 
   create() {
     this.helper.drawBackground()
-    this.helper.createMenu({
+    this.menu.create({
       list: [
         {
           menu: "create-room",
@@ -25,23 +28,7 @@ export default class RoomsScene extends Phaser.Scene {
           label: "Назад",
         },
       ],
-      onClick: this.menuClick.bind(this)
+      backScene: "MenuScene"
     })
-  }
-
-  menuClick(object: any) {
-    switch (object.menu) {
-      case 'create-room':
-        this.scene.start("CreateRoomScene")
-        break;
-
-      case 'find-room':
-        this.scene.start("FindRoomScene")
-        break;
-
-      case 'back':
-        this.scene.start("MenuScene")
-        break;
-    }
   }
 }
