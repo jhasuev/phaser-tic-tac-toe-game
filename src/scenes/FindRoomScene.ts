@@ -47,6 +47,7 @@ export default class FindRoomScene extends Phaser.Scene {
   }
 
   closeModal() {
+    this.sound.play("click")
     this.inputField.value = ''
     this.helper.closeModals()
   }
