@@ -29,17 +29,9 @@ export default class Cells {
   }
 
   getFreeCells() {
-    // переделать через редюсер
-    const freeCells = []
-    this.cells.forEach((row: any) => {
-      row.forEach((cell: any) => {
-        if (!cell.sign) {
-          freeCells.push(cell)
-        }
-      })
-    })
-
-    return freeCells
+    return this.cells.reduce((acc: object[]|any, row: any) => {
+      return acc.push(...row.filter((col: any) => !col.sign)) && acc || []
+    }, [])
   }
 
   setSign(cell: object|any, sign: string) {
