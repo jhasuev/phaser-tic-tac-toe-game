@@ -1,5 +1,5 @@
-import _configs from "../configs";
-const { STYLES, MENU } = _configs
+import configs from "../configs";
+const { STYLES, MENU } = configs
 
 export default class Menu {
   public scene: any

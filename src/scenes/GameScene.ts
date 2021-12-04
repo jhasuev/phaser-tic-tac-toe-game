@@ -1,9 +1,9 @@
 import Helper from "../classes/Helper"
 import Cells from "../classes/Cells"
 import InfoBox from "../classes/InfoBox"
-import _configs from "../configs"
+import configs from "../configs"
 import Npc from "../classes/Npc"
-const { GAME } = _configs
+const { GAME } = configs
 
 export default class GameScene extends Phaser.Scene {
   public helper: any
@@ -40,6 +40,7 @@ export default class GameScene extends Phaser.Scene {
     this.player = new Npc(this)
     this.enemy = new Npc(this)
     this.winnerId = ''
+    this.queueId = ''
     
     if (this.params.type == 'pve') {
       this.enemy.isBot = true

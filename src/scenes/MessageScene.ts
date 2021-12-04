@@ -1,12 +1,15 @@
+import Content from "../classes/Content"
 import Helper from "../classes/Helper"
 import Menu from "../classes/Menu"
 
 export default class MessageScene extends Phaser.Scene {
+  public content: any
   public helper: any
   public menu: any
 
   constructor() {
     super("MessageScene")
+    this.content = new Content(this)
     this.helper = new Helper(this)
     this.menu = new Menu(this)
   }
@@ -61,8 +64,8 @@ export default class MessageScene extends Phaser.Scene {
       },
     }
 
-    this.helper.createHeader(currentMenu[params.type].header)
-    this.helper.createDescription(currentMenu[params.type].text)
+    this.content.createHeader(currentMenu[params.type].header)
+    this.content.createDescription(currentMenu[params.type].text)
 
     this.menu.create({
       list: currentMenu[params.type].list,

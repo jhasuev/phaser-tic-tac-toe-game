@@ -8,7 +8,6 @@ import FindRoomScene from "./scenes/FindRoomScene"
 import CreateRoomScene from "./scenes/CreateRoomScene"
 import GameScene from "./scenes/GameScene"
 import MessageScene from "./scenes/MessageScene"
-import FinishScene from "./scenes/FinishScene"
 
 const config = {
     type: Phaser.AUTO,
@@ -29,7 +28,6 @@ const config = {
         CreateRoomScene,
         GameScene,
         MessageScene,
-        FinishScene,
     ]
 }
 
