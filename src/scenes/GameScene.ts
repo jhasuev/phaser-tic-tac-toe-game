@@ -68,7 +68,7 @@ export default class GameScene extends Phaser.Scene {
 
   start() {
     if (this.queueId == this.enemy.id) {
-      this.enemy.walk()
+      this.enemy.botWalk()
     }
   }
 
@@ -77,8 +77,20 @@ export default class GameScene extends Phaser.Scene {
     this.time.addEvent({
       delay: GAME.duration,
       callback: () => {
-        // TODO: перекинуть на сцену результата
-        this.scene.start("MenuScene")
+        if (this.player.sign === winner) {
+          this.scene.start("MessageScene", { type: "player-win" })
+        } else {
+          this.scene.start("MessageScene", { type: "enemy-win" })
+        }
+      },
+    })
+  }
+
+  onFinish() {
+    this.time.addEvent({
+      delay: GAME.duration,
+      callback: () => {
+        this.scene.start("MessageScene", { type: "game-finished" })
       },
     })
   }
@@ -88,13 +100,25 @@ export default class GameScene extends Phaser.Scene {
   }
 
   onCellClick(pointer: object, object: object|any) {
-    if (this.queueId === this.player.id) {
+    if (this.canPlayerPass(object.cell)) {
       // добавляем наш знак в выбранную клетку
       this.cells.setSign(object.cell, this.player.sign)
 
       // переводим очередь на врага
       this.setQueueToEnemy()
     }
+  }
+
+  canPlayerPass(cell: object|any) {
+    return this.canPass(this.player.id, cell)
+  }
+
+  canBotPass(cell: object|any) {
+    return this.canPass(this.enemy.id, cell)
+  }
+
+  canPass(userId:string, cell: object|any) {
+    return this.queueId === userId && !cell.sign && !this.hasWinner()
   }
 
   setQueueToEnemy() {
@@ -108,7 +132,7 @@ export default class GameScene extends Phaser.Scene {
     this.infoBox.updateQueue()
 
     if (this.enemy.isBot) {
-      this.enemy.walk()
+      this.enemy.botWalk()
     } else {
       // TODO: отправить на сервер запрос и передать очередь сопернику
     }
@@ -118,7 +142,7 @@ export default class GameScene extends Phaser.Scene {
     if (this.hasWinner()) {
       return console.error("has winner...")
     }
-    
+
     this.queueId = this.player.id
     
     // обновляем данные: текст текущего ходящего

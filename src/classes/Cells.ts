@@ -14,7 +14,6 @@ export default class Cells {
   
   create(params: object|any) {
     this.params = params
-    // console.log('this.createEmptyCells()', this.createEmptyCells())
     this.cells = this.createEmptyCells()
     this.winner = ''
     this.addCellsTimes = GAME.addCellsTimes
@@ -75,13 +74,12 @@ export default class Cells {
     const cellsMinimum: number = this.cells.length / 100 * GAME.addCellsPercent
     
     if (cellsMinimum > freeCellsCount && this.addCellsTimes) {
-      // TODO: добавить клетки по краям (только 2 раза)
       this.addCellsToEdges()
       this.addCellsTimes -= 1
     }
 
     if (!freeCellsCount) {
-      // TODO: свободных клеток нет, закончить игру
+      this.scene.onFinish()
     }
   }
 
@@ -117,7 +115,6 @@ export default class Cells {
       
       // по горизонтали
       const colSigns = Object.keys(colLettersCounting)
-      console.log('colSigns', colSigns)
       
       if (colSigns.length === 1 && colSigns[0]) {
         this.winner = colSigns[0]
@@ -240,7 +237,6 @@ export default class Cells {
     })
 
     this.fillCells(this.cells)
-    // console.log('addCellsToEdges: this.cells', this.cells)
   }
 
   getColumnsTemplate() {

@@ -28,7 +28,37 @@ export default class MessageScene extends Phaser.Scene {
             label: "На главную",
           },
         ],
-      }
+      },
+      "game-finished": {
+        header: "Ничья",
+        text: "Все клетки на поле заполнены.\nНе переживайте, в следующий раз у вас обязательно все получится!",
+        list: [
+          {
+            menu: "menu",
+            label: "На главную",
+          },
+        ],
+      },
+      "enemy-win": {
+        header: "Вы проиграли",
+        text: "Увы, но в этот раз выиграл ваш соперник.\nНе переживайте, в следующий раз у вас обязательно все получится!",
+        list: [
+          {
+            menu: "menu",
+            label: "На главную",
+          },
+        ],
+      },
+      "player-win": {
+        header: "Вы выиграли",
+        text: "Поздравляем!\nВы одержали победу на вашим соперником!",
+        list: [
+          {
+            menu: "menu",
+            label: "На главную",
+          },
+        ],
+      },
     }
 
     this.helper.createHeader(currentMenu[params.type].header)
