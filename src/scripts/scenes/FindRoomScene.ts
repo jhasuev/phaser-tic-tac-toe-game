@@ -2,9 +2,9 @@ import Helper from "../classes/Helper"
 
 export default class FindRoomScene extends Phaser.Scene {
   public helper: any
-  public closeButton: HTMLDivElement
-  public inputField: HTMLInputElement
-  public okButton: HTMLButtonElement
+  public closeButton: HTMLDivElement | any
+  public inputField: HTMLInputElement | any
+  public okButton: HTMLButtonElement | any
 
   constructor() {
     super("FindRoomScene")

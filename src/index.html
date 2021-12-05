@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+
+    <title><%= htmlWebpackPlugin.options.gameName %></title>
+    <noscript>Please enable javascript to continue using this application.</noscript>
+    <link rel="stylesheet" href="./assets/styles.css">
+
+    <!-- installs the serviceWorker -->
+    <!-- <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+        })
+      }
+    </script> -->
+  </head>
+  <body>
+    <div id="phaser-game"></div>
+    <div id="modals" class="modals">
+      <div class="modals__wrapper">
+        <div class="modals__item  js-modal-item" id="enter-room-id">
+          <div class="modals__close  js-modals-close">&times;</div>
+          <label>
+            <input type="text" class="js-room-id-field" placeholder="Введите номер ID">
+          </label>
+          <button class="btn enter-room-btn  js-enter-room-btn">Войти</button>
+        </div>
+        <div class="modals__bg"></div>
+      </div>
+    </div>
+  </body>
+</html>

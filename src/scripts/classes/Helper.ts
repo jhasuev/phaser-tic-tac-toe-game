@@ -1,6 +1,6 @@
 export default class Background {
   public scene: any
-  public modals: HTMLDivElement
+  public modals: HTMLDivElement| any
 
   constructor(scene: object) {
     this.scene = scene
@@ -23,13 +23,13 @@ export default class Background {
     this.closeModals()
     this.modals.style.display = "block"
 
-    const currentModal: HTMLDivElement = document.querySelector(modalSelector)
+    const currentModal: HTMLDivElement|any = document.querySelector(modalSelector)
     currentModal.style.display = "block"
   }
 
   closeModals() {
     this.modals.style.display = "none"
-    Array.from(document.querySelectorAll(".js-modal-item")).forEach((modal: HTMLDivElement) => {
+    Array.from(document.querySelectorAll(".js-modal-item")).forEach((modal: HTMLDivElement|any) => {
       modal.style.display = "none"
     })
   }

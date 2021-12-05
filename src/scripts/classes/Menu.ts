@@ -13,6 +13,8 @@ export default class Menu {
     this.backScene = params.backScene || "MenuScene"
 
     params.list.forEach((button: object|any, index: number) => {
+      console.log('button', button);
+      
       const x: number = (this.scene.game.config.width - MENU.bg.width) / 2
       const y: number = MENU.startY + ((MENU.bg.height + MENU.offset) * index) + (+params.startY || 0)
 
@@ -20,10 +22,11 @@ export default class Menu {
       this.createMenuItemText(button.label, y)
     })
     
-    this.scene.input.on("gameobjectdown", (pointer: object, { menu }) => {
+    this.scene.input.on("gameobjectdown", (pointer: object, button: any) => {
+      console.log('button', button)
       this.scene.sound.play("click")
-      const callback: Function = params.onClick || this.onClick.bind(this)
-      callback(menu)
+      const callback: Function = button.onClick || params.onClick || this.onClick.bind(this)
+      callback(button.menu)
     })
   }
 
@@ -66,6 +69,7 @@ export default class Menu {
     button.rectangle.setInteractive()
     button.rectangle.setOrigin(0)
     button.rectangle.menu = button.menu
+    button.rectangle.onClick = button.onClick
   }
 
   createMenuItemText(text: string, y: number) {

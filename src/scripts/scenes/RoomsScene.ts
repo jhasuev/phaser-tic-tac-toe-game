@@ -1,5 +1,7 @@
 import Helper from "../classes/Helper"
 import Menu from "../classes/Menu"
+import socket from "../socket/"
+import ACTIONS from '../socket/actions.json'
 
 export default class RoomsScene extends Phaser.Scene {
   public helper: any
@@ -9,6 +11,13 @@ export default class RoomsScene extends Phaser.Scene {
     super("RoomsScene")
     this.helper = new Helper(this)
     this.menu = new Menu(this)
+    this.init()
+  }
+
+  init() {
+    socket.on(ACTIONS.ROOM_CREATED, (roomId: number) => {
+      console.log('roomId', roomId)
+    })
   }
 
   create() {
@@ -18,6 +27,7 @@ export default class RoomsScene extends Phaser.Scene {
         {
           menu: "create-room",
           label: "Создать свою комнату",
+          onClick: this.onCreateClick.bind(this)
         },
         {
           menu: "find-room",
@@ -30,5 +40,13 @@ export default class RoomsScene extends Phaser.Scene {
       ],
       backScene: "MenuScene"
     })
+  }
+
+  onCreateClick() {
+    console.log('=>>>>>>>>> onCreateClick');
+    console.log('socket =>>>>>>>>>', socket);
+    console.log('io =>>>>>>>>>', socket);
+    
+    socket.emit(ACTIONS.CREATE_ROOM)
   }
 }

@@ -28,6 +28,6 @@ export default class InfoBox {
     return {
       [this.scene.enemy.id]: "Противника",
       [this.scene.player.id]: "Ваш",
-    }[queueId]
+    }[queueId] || ''
   }
 }

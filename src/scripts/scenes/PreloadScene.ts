@@ -23,7 +23,7 @@ export default class PreloadScene extends Phaser.Scene {
   }
 
   create() {
-    this.sound.play("bg", { volume: .25, loop: true })
+    // this.sound.play("bg", { volume: .25, loop: true })
 
     this.time.addEvent({
       // для красоты
