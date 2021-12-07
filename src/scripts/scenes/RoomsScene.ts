@@ -11,12 +11,12 @@ export default class RoomsScene extends Phaser.Scene {
     super("RoomsScene")
     this.helper = new Helper(this)
     this.menu = new Menu(this)
-    this.init()
   }
 
   init() {
-    socket.on(ACTIONS.ROOM_CREATED, (roomId: number) => {
-      console.log('roomId', roomId)
+    socket.once(ACTIONS.ROOM_CREATED, (room: any) => {
+      console.log('room', room)
+      this.scene.start("RoomScene", { room })
     })
   }
 
@@ -43,10 +43,7 @@ export default class RoomsScene extends Phaser.Scene {
   }
 
   onCreateClick() {
-    console.log('=>>>>>>>>> onCreateClick');
-    console.log('socket =>>>>>>>>>', socket);
-    console.log('io =>>>>>>>>>', socket);
-    
+    console.log('onCreateClick')
     socket.emit(ACTIONS.CREATE_ROOM)
   }
 }

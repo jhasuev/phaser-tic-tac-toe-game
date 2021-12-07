@@ -1,4 +1,6 @@
 import Helper from "../classes/Helper"
+import socket from "../socket/"
+import ACTIONS from '../socket/actions.json'
 
 export default class FindRoomScene extends Phaser.Scene {
   public helper: any
@@ -9,6 +11,14 @@ export default class FindRoomScene extends Phaser.Scene {
   constructor() {
     super("FindRoomScene")
     this.helper = new Helper(this)
+  }
+
+  init() {
+    socket.once(ACTIONS.WRONG_ROOM, this.onWrongRoom.bind(this))
+    socket.once(ACTIONS.INIT_GAME, (data: any) => {
+      this.scene.start("GameScene", { type: "pvp", data })
+      this.closeModal()
+    })
   }
 
   create() {
@@ -33,17 +43,17 @@ export default class FindRoomScene extends Phaser.Scene {
   }
 
   onOkClick() {
-    this.closeModal()
-    this.helper.closeModals()
     const roomId: number = parseInt(this.inputField.value)
     if (roomId) {
-      const userId = "asdgfhsvo39vrpmsdf;nidlndir"
-      // TODO: userId получаем с сервера - будет находится ID сокета
-      this.scene.start("GameScene", { type: "pvp", roomId, userId })
+      socket.emit(ACTIONS.ENTER_ROOM, roomId)
     } else {
-      // TODO: создать сцену "MessageScene"
-      this.scene.start("MessageScene", { type: "wrong-room-id" })
+      this.onWrongRoom()
     }
+  }
+
+  onWrongRoom() {
+    this.closeModal()
+    this.scene.start("MessageScene", { type: "wrong-room-id" })
   }
 
   closeModal() {

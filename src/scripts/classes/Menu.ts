@@ -13,8 +13,6 @@ export default class Menu {
     this.backScene = params.backScene || "MenuScene"
 
     params.list.forEach((button: object|any, index: number) => {
-      console.log('button', button);
-      
       const x: number = (this.scene.game.config.width - MENU.bg.width) / 2
       const y: number = MENU.startY + ((MENU.bg.height + MENU.offset) * index) + (+params.startY || 0)
 
@@ -23,7 +21,6 @@ export default class Menu {
     })
     
     this.scene.input.on("gameobjectdown", (pointer: object, button: any) => {
-      console.log('button', button)
       this.scene.sound.play("click")
       const callback: Function = button.onClick || params.onClick || this.onClick.bind(this)
       callback(button.menu)
@@ -41,7 +38,7 @@ export default class Menu {
         break;
       
       case 'create-room':
-        this.scene.scene.start("CreateRoomScene")
+        this.scene.scene.start("RoomScene")
         break;
 
       case 'find-room':

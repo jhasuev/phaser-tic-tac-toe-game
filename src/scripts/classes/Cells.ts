@@ -28,9 +28,19 @@ export default class Cells {
   }
 
   getFreeCells() {
+    return this.getAllCells().filter((col: any) => !col.sign)
+  }
+
+  getAllCells() {
     return this.cells.reduce((acc: object[]|any, row: any) => {
-      return acc.push(...row.filter((col: any) => !col.sign)) && acc || []
+      return acc.push(...row) && acc || []
     }, [])
+  }
+
+  getCellByCoords({ row, col }) {
+    return this.getAllCells().find((cell: any) => {
+      return cell.row === row && cell.col === col
+    })
   }
 
   setSign(cell: object|any, sign: string) {

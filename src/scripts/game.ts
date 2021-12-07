@@ -5,7 +5,7 @@ import StartScene from "./scenes/StartScene"
 import MenuScene from "./scenes/MenuScene"
 import RoomsScene from "./scenes/RoomsScene"
 import FindRoomScene from "./scenes/FindRoomScene"
-import CreateRoomScene from "./scenes/CreateRoomScene"
+import RoomScene from "./scenes/RoomScene"
 import GameScene from "./scenes/GameScene"
 import MessageScene from "./scenes/MessageScene"
 
@@ -25,7 +25,7 @@ const config = {
         MenuScene,
         RoomsScene,
         FindRoomScene,
-        CreateRoomScene,
+        RoomScene,
         GameScene,
         MessageScene,
     ]
