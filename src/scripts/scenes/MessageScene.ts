@@ -62,6 +62,16 @@ export default class MessageScene extends Phaser.Scene {
           },
         ],
       },
+      "enemy-losed": {
+        header: "Упс...",
+        text: "Ваш соперник вышел.\nПопробуйте поиграть с кем-нибудь другим",
+        list: [
+          {
+            menu: "menu",
+            label: "На главную",
+          },
+        ],
+      },
     }
 
     this.content.createHeader(currentMenu[params.type].header)

@@ -25,6 +25,7 @@ export default class GameScene extends Phaser.Scene {
   init() {
     socket.on(ACTIONS.SET_SIGN, this.onEnemyPassed.bind(this))
     socket.on(ACTIONS.SET_QUEUE, this.onSetQueue.bind(this))
+    socket.once(ACTIONS.ENEMY_LOSED, this.onEnemyLosed.bind(this))
   }
 
   onEnemyPassed(coords: any) {
@@ -105,6 +106,10 @@ export default class GameScene extends Phaser.Scene {
 
   onFinish() {
     this.finish()
+  }
+
+  onEnemyLosed() {
+    this.finish("enemy-losed")
   }
   
   finish(type: string = "game-finished") {

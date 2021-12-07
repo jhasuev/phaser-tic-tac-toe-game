@@ -55,7 +55,7 @@ class Game {
     return this.rooms.find(room => room.id === id)
   }
 
-  getEnemyOf(roomId, socketId) {
+  getEnemyIdOf(roomId, socketId) {
     const room = this.getRoomById(roomId)
     if (room) {
       const enemy = room.players.find(player => player.socketId != socketId)

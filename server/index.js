@@ -36,7 +36,7 @@ io.on("connection", socket => {
       room.players.forEach(({socketId}) => {
         const data = {
           ...room,
-          enemyId: game.getEnemyOf(roomId, socketId),
+          enemyId: game.getEnemyIdOf(roomId, socketId),
           playerId: socketId,
         }
         io.to(socketId).emit(ACTIONS.INIT_GAME, data)
@@ -47,10 +47,6 @@ io.on("connection", socket => {
   })
 
   socket.on(ACTIONS.SET_SIGN, ({enemyId, coords}) => {
-    console.log('====================================')
-    console.log('socket.id', socket.id)
-    console.log('enemyId', enemyId)
-    console.log('coords', coords)
     io.to(enemyId).emit(ACTIONS.SET_SIGN, coords)
   })
 
@@ -61,6 +57,15 @@ io.on("connection", socket => {
   
   socket.on('disconnect', () => {
     console.log('disconnected socket.id', socket.id);
-    game.removeRoomByUserId(socket.id)
+
+    const room = game.getRoomWithPlayer(socket.id)
+    if (room) {
+      const emenyId = game.getEnemyIdOf(room.id, socket.id)
+      if (emenyId) {
+        io.to(emenyId).emit(ACTIONS.ENEMY_LOSED)
+      }
+
+      game.removeRoomByUserId(socket.id)
+    }
   })
 })
