@@ -23,8 +23,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   init() {
-    socket.once(ACTIONS.SET_SIGN, this.onEnemyPassed.bind(this))
-    socket.once(ACTIONS.SET_QUEUE, this.onSetQueue.bind(this))
+    socket.on(ACTIONS.SET_SIGN, this.onEnemyPassed.bind(this))
+    socket.on(ACTIONS.SET_QUEUE, this.onSetQueue.bind(this))
   }
 
   onEnemyPassed(coords: any) {
@@ -100,23 +100,20 @@ export default class GameScene extends Phaser.Scene {
 
   onWin(winner: string) {
     this.winnerId = this.player.sign === winner ? this.player.id : this.enemy.id
-    this.time.addEvent({
-      delay: GAME.duration,
-      callback: () => {
-        if (this.player.sign === winner) {
-          this.scene.start("MessageScene", { type: "player-win" })
-        } else {
-          this.scene.start("MessageScene", { type: "enemy-win" })
-        }
-      },
-    })
+    this.finish(this.player.sign === winner ? "player-win" : "enemy-win")
   }
 
   onFinish() {
+    this.finish()
+  }
+  
+  finish(type: string = "game-finished") {
+    socket.emit(ACTIONS.REMOVE_ROOM, this.roomId)
+
     this.time.addEvent({
       delay: GAME.duration,
       callback: () => {
-        this.scene.start("MessageScene", { type: "game-finished" })
+        this.scene.start("MessageScene", { type })
       },
     })
   }
