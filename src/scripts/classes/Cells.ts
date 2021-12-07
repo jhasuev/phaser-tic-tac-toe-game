@@ -48,6 +48,8 @@ export default class Cells {
       return console.error("already set")
     }
 
+    this.scene.sound.play(`enter-${sign}`, { volume: .5 })
+
     cell.sign = sign
     cell.cellSignObject = this.scene.add.image(
       cell.cellObject.x + (cell.cellObject.width / 2),
@@ -81,7 +83,7 @@ export default class Cells {
 
   checkCells() {
     const freeCellsCount: number = this.getFreeCells().length
-    const cellsMinimum: number = this.cells.length / 100 * GAME.addCellsPercent
+    const cellsMinimum: number = Math.pow(this.cells.length, 2) / 100 * (100 - GAME.addCellsPercent)
     
     if (cellsMinimum > freeCellsCount && this.addCellsTimes) {
       this.addCellsToEdges()
@@ -217,6 +219,7 @@ export default class Cells {
   }
 
   addCellsToEdges() {
+    this.scene.sound.play("cells-adding")
     const cellsCurrentCount: number = this.cells.length
     this.cells.unshift(this.getNewEmptyArr(cellsCurrentCount))
     this.cells.push(this.getNewEmptyArr(cellsCurrentCount))

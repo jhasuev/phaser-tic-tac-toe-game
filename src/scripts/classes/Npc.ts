@@ -12,8 +12,9 @@ export default class Npc {
   }
 
   botWalk() {
+    const delay: number = Phaser.Math.Between(500, 2000)
     this.scene.time.addEvent({
-      delay: Phaser.Math.Between(100, 500) + GAME.apperingDuration,
+      delay,
       callback: this.botWalkHandler,
       callbackScope: this,
     })

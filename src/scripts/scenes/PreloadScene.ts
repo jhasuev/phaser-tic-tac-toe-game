@@ -18,6 +18,7 @@ export default class PreloadScene extends Phaser.Scene {
     this.load.audio("click", "./assets/audio/click.ogg")
     this.load.audio("enter-o", "./assets/audio/enter-o.ogg")
     this.load.audio("enter-x", "./assets/audio/enter-x.ogg")
+    this.load.audio("cells-adding", "./assets/audio/cells-adding.ogg")
 
     new Preloader(this)
   }
