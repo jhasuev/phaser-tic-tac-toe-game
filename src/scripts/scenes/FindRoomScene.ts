@@ -27,6 +27,7 @@ export default class FindRoomScene extends Phaser.Scene {
     this.addEvents()
     
     this.inputField = document.querySelector(".js-room-id-field")
+    this.inputField?.focus?.()
   }
 
   addEvents() {
